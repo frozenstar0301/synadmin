@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { Paper } from '@mui/material';
-import { Screen, FontItem, ImageItem } from '../../types/index';
+import { SignUpScreen, FontItem, ImageItem } from '../../types/index';
 
 interface Props {
-  screen: Partial<Screen>;
+  screen: Partial<SignUpScreen>;
   fonts: FontItem[];
   images: ImageItem[];
 }
 
-export const ScreenPreview: React.FC<Props> = ({ screen, fonts, images }) => {
+export const SignUpScreenPreview: React.FC<Props> = ({ screen, fonts, images }) => {
   const [fontsLoaded, setFontsLoaded] = useState<{ [key: string]: boolean }>({});
-  const [isChecked, setIsChecked] = useState(false);
   const backgroundImage = images.find(img => img.id === screen.background_image_id);
   const buttonImage = images.find(img => img.id === screen.button_image_id);
   const signinFont = fonts.find(font => font.id === screen.font_id);
   const subpanelImage = images.find(img => img.id === screen.subpanel_image_id);
   const emailImage = images.find(img => img.id === screen.email_image_id);
+  const userNameImage = images.find(img => img.id === screen.username_image_id);
   const passwordImage = images.find(img => img.id === screen.password_image_id);
-  const checkboxImage = images.find(img => img.id === screen.checkbox_image_id);
+  const passwordConfirmImage = images.find(img => img.id === screen.password_confirm_image_id);
   
-  // Get the checkbox background color from screen props or use default
-  const checkboxBackgroundColor = screen.checkbox_background_color || '#8BC34A';
+  const emailBorderColor = screen.email_border_color || '#ffffff';
+  const userNameBorderColor = screen.username_border_color || '#ffffff';
+  const passwordBorderColor = screen.password_border_color || '#ffffff';
+  const passwordConfirmBorderColor = screen.password_confirm_border_color || '#ffffff';
 
   // Font loading logic remains the same
   useEffect(() => {
@@ -79,10 +81,6 @@ export const ScreenPreview: React.FC<Props> = ({ screen, fonts, images }) => {
     }
   };
 
-  const toggleCheckbox = () => {
-    setIsChecked(!isChecked);
-  };
-
   return (
     <Paper
       sx={{
@@ -125,7 +123,7 @@ export const ScreenPreview: React.FC<Props> = ({ screen, fonts, images }) => {
             ...fontStyle,
           }}
         >
-          Sign In
+          Sign Up
         </Typography>
 
         <Box
@@ -210,16 +208,71 @@ export const ScreenPreview: React.FC<Props> = ({ screen, fonts, images }) => {
                       bgcolor: emailImage ? 'transparent' : '#8BC34A',
                       borderRadius: '25px',
                       '& fieldset': {
-                        borderColor: 'white',
+                        borderColor: emailBorderColor,
                         borderWidth: '1px',
                       },
                       '&:hover fieldset': {
-                        borderColor: 'white', // Keep border color the same on hover
-                        borderWidth: '1px',
+                        borderColor: emailBorderColor,
                       },
                       '&.Mui-focused fieldset': {
-                        borderColor: 'white', // Keep border color the same on focus
+                        borderColor: emailBorderColor,
+                      },
+                    },
+                    '& .MuiOutlinedInput-input': {
+                      color: 'white',
+                      ...fontStyle,
+                    },
+                  }}
+                />
+              </Box>
+            </Box>
+
+            <Box sx={{ marginBottom: '1rem' }}>
+              <Typography
+                sx={{
+                  color: 'white',
+                  marginBottom: '0.5rem',
+                  ...fontStyle,
+                }}
+              >
+                Username
+              </Typography>
+              <Box sx={{ position: 'relative', width: '100%' }}>
+                {userNameImage && (
+                  <Box
+                    component="img"
+                    src={userNameImage.url}
+                    sx={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center',
+                      borderRadius: '25px',
+                    }}
+                    alt=""
+                  />
+                )}
+                <TextField
+                  fullWidth
+                  placeholder="Enter your username."
+                  sx={{
+                    position: 'relative',
+                    zIndex: 1,
+                    '& .MuiOutlinedInput-root': {
+                      bgcolor: userNameImage ? 'transparent' : '#8BC34A',
+                      borderRadius: '25px',
+                      '& fieldset': {
+                        borderColor: userNameBorderColor,
                         borderWidth: '1px',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: userNameBorderColor,
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: userNameBorderColor,
                       },
                     },
                     '& .MuiOutlinedInput-input': {
@@ -270,16 +323,14 @@ export const ScreenPreview: React.FC<Props> = ({ screen, fonts, images }) => {
                       bgcolor: passwordImage ? 'transparent' : '#8BC34A',
                       borderRadius: '25px',
                       '& fieldset': {
-                        borderColor: 'white',
+                        borderColor: passwordBorderColor,
                         borderWidth: '1px',
                       },
                       '&:hover fieldset': {
-                        borderColor: 'white', // Keep border color the same on hover
-                        borderWidth: '1px',
+                        borderColor: passwordBorderColor,
                       },
                       '&.Mui-focused fieldset': {
-                        borderColor: 'white', // Keep border color the same on focus
-                        borderWidth: '1px',
+                        borderColor: passwordBorderColor,
                       },
                     },
                     '& .MuiOutlinedInput-input': {
@@ -291,80 +342,61 @@ export const ScreenPreview: React.FC<Props> = ({ screen, fonts, images }) => {
               </Box>
             </Box>
 
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginBottom: '1rem',
-              }}
-            >
-              <Box
-                onClick={toggleCheckbox}
+            <Box sx={{ marginBottom: '1rem' }}>
+              <Typography
                 sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  cursor: 'pointer',
+                  color: 'white',
+                  marginBottom: '0.5rem',
+                  ...fontStyle,
                 }}
               >
-                <Typography
+                Re-Enter Password
+              </Typography>
+              <Box sx={{ position: 'relative', width: '100%' }}>
+                {passwordConfirmImage && (
+                  <Box
+                    component="img"
+                    src={passwordConfirmImage.url}
+                    sx={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center',
+                      borderRadius: '25px',
+                    }}
+                    alt=""
+                  />
+                )}
+                <TextField
+                  fullWidth
+                  type="password"
+                  placeholder="Re-Enter your password."
                   sx={{
-                    color: 'white',
-                    fontWeight: 'bold',
-                    ...fontStyle,
-                  }}
-                >
-                  Remember Me &nbsp;
-                </Typography>
-                <Box
-                  sx={{
-                    width: '24px',
-                    height: '24px',
-                    // Use the checkbox background color from screen props
-                    backgroundColor: checkboxBackgroundColor,
-                    borderRadius: '4px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginRight: '8px',
                     position: 'relative',
+                    zIndex: 1,
+                    '& .MuiOutlinedInput-root': {
+                      bgcolor: passwordConfirmImage ? 'transparent' : '#8BC34A',
+                      borderRadius: '25px',
+                      '& fieldset': {
+                        borderColor: passwordConfirmBorderColor,
+                        borderWidth: '1px',
+                      },
+                      '&:hover fieldset': {
+                        borderColor: passwordConfirmBorderColor,
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: passwordConfirmBorderColor,
+                      },
+                    },
+                    '& .MuiOutlinedInput-input': {
+                      color: 'white',
+                      ...fontStyle,
+                    },
                   }}
-                >
-                  {isChecked && (
-                    <Box
-                      sx={{
-                        width: '16px',
-                        height: '16px',
-                        position: 'absolute',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      {checkboxImage ? (
-                        <Box
-                          component="img"
-                          src={checkboxImage.url}
-                          sx={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                          }}
-                          alt="Checkmark"
-                        />
-                      ) : (
-                        <Box
-                          sx={{
-                            width: '16px',
-                            height: '16px',
-                            backgroundColor: 'white',
-                            clipPath: 'polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%)',
-                          }}
-                        />
-                      )}
-                    </Box>
-                  )}
-                </Box>
+                />
               </Box>
             </Box>
 
@@ -385,10 +417,9 @@ export const ScreenPreview: React.FC<Props> = ({ screen, fonts, images }) => {
               }}
             >
               <Typography sx={{ color: 'white', fontWeight: 'bold', ...fontStyle }}>
-                No account?{' '}
-                <a href="#" style={{ ...fontStyle, color: '#CCE8A6' }}>Create One!</a>
+                Already exist?{' '}
+                <a href="#" style={{ ...fontStyle, color: '#CCE8A6' }}>Sign In</a>
               </Typography>
-              <a href="#" style={{ ...fontStyle, color: '#CCE8A6' }}>Forget Password</a>
             </Box>
 
             <Box
@@ -440,7 +471,7 @@ export const ScreenPreview: React.FC<Props> = ({ screen, fonts, images }) => {
                     ...fontStyle,
                   }}
                 >
-                  Login
+                  Register
                 </Typography>
               </Button>
             </Box>

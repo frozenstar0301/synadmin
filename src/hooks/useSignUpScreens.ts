@@ -9,7 +9,7 @@ const api = axios.create({
     baseURL: API_URL,
 });
 
-export const useScreens = () => {
+export const useSignUpScreens = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,7 +17,7 @@ export const useScreens = () => {
     try {
       setIsLoading(true);
       
-      await api.post('/screen', screen);
+      await api.post('/signupscreen', screen);
 
     } catch (err) {
       console.error('Save error:', err);
@@ -30,7 +30,7 @@ export const useScreens = () => {
 
   const loadScreen = async () => {
     try {
-      const response = await api.get('/screen');
+      const response = await api.get('/signupscreen');
       const existingData = response.data;
 
       return existingData;

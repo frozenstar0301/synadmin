@@ -2,16 +2,13 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from '../contexts/AuthContext';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Button,
   Card,
   CardContent,
-  Checkbox,
   Container,
-  FormControlLabel,
-  Link,
   Stack,
   TextField,
   Typography,
@@ -130,13 +127,6 @@ export const LoginForm = () => {
                 />
               </Stack>
 
-              <Box sx={{ mt: 2 }}>
-                <FormControlLabel
-                  control={<Checkbox color="primary" />}
-                  label="Remember me"
-                />
-              </Box>
-
               <Button
                 disabled={isSubmitting}
                 fullWidth
@@ -151,30 +141,6 @@ export const LoginForm = () => {
                   'Sign In'
                 )}
               </Button>
-
-              <Box sx={{ mt: 3 }}>
-                <Link
-                  component={RouterLink}
-                  to="/forgot-password"
-                  variant="body1"
-                  sx={{ display: 'inline-block', mb: 2 }}
-                >
-                  Forgot password?
-                </Link>
-                <Typography
-                  color="textSecondary"
-                  variant="body1"
-                >
-                  Don&apos;t have an account?{' '}
-                  <Link
-                    component={RouterLink}
-                    to="/register"
-                    variant="body1"
-                  >
-                    Sign up
-                  </Link>
-                </Typography>
-              </Box>
             </form>
           </CardContent>
         </Card>

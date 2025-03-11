@@ -3,10 +3,9 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
 import { LoginForm } from './components/LoginForm';
-import { RegisterForm } from './components/RegisterForm';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Dashboard } from './components/Dashboard';
-import { SignInCustomize } from './pages/SignInCustomize';
+import { SharedLayout } from './components/layout/SharedLayout';
 
 function App() {
   return (
@@ -15,7 +14,6 @@ function App() {
         <Toaster position="top-right" />
         <Routes>
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/register" element={<RegisterForm />} />
           <Route
             path="/dashboard"
             element={
@@ -25,15 +23,17 @@ function App() {
             }
           />
           <Route
-            path="/signincustomize"
+            path="/customize"
             element={
               <ProtectedRoute>
-                <SignInCustomize />
+                <SharedLayout />
               </ProtectedRoute>
             }
           />
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/signincustomize" element={<Navigate to="/signincustomize" replace />} />
+          {/* Keep these routes for backward compatibility, but redirect to the new shared layout */}
+          <Route path="/signincustomize" element={<Navigate to="/customize" replace />} />
+          <Route path="/signupcustomize" element={<Navigate to="/customize" replace />} />
+          <Route path="/" element={<Navigate to="/customize" replace />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
