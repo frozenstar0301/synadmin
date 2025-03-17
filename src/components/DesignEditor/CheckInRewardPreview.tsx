@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Typography, Paper } from '@mui/material';
 import { CheckInScreen, FontItem, ImageItem } from '../../types/index';
-import defaultMarkImage from '../../assets/Calendar.png';
+import defaultMarkImage from '../../assets/calendar.png';
 import defaultGemImage from '../../assets/gem.png';
 import defaultCardImage from '../../assets/itemicon.png';
 import defaultGetImage from '../../assets/get.png';
