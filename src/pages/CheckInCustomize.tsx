@@ -612,7 +612,7 @@ export const CheckInCustomize = ({ id }: CheckInCustomizeProps) => {
                   />
                 </TabPanel>
 
-                <TabPanel value={tabValue} index={8}>
+                <TabPanel value={tabValue} index={9}>
                   <BackgroundSelector
                     title="Card Icon Image"
                     images={images}
@@ -623,7 +623,7 @@ export const CheckInCustomize = ({ id }: CheckInCustomizeProps) => {
                   />
                 </TabPanel>
 
-                <TabPanel value={tabValue} index={9}>
+                <TabPanel value={tabValue} index={10}>
                   <BackgroundSelector
                     title="Get Image"
                     images={images}
@@ -634,7 +634,7 @@ export const CheckInCustomize = ({ id }: CheckInCustomizeProps) => {
                   />
                 </TabPanel>
 
-                <TabPanel value={tabValue} index={10}>
+                <TabPanel value={tabValue} index={11}>
                   <Paper
                     elevation={2}
                     sx={{
