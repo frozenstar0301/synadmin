@@ -40,4 +40,30 @@ export interface SignUpScreen {
     font_id: string | null;
 }
 
+export interface ForgetPwScreen {
+    id: string;
+    background_image_id: string | null;
+    button_image_id: string | null;
+    subpanel_image_id: string | null;
+    email_image_id: string | null;
+    email_border_color: string | null;
+    font_id: string | null;
+}
+
+export interface CheckInScreen {
+    id: string;
+    background1_image_id: string | null;
+    background2_image_id: string | null;
+    button_image_id: string | null;
+    card_border_color: string | null;
+    card_content_bg_image_id: string | null;
+    card_title_bg_image_id: string | null;
+    gem_image_id: string | null;
+    get_image_id: string | null;
+    mark_image_id: string | null;
+    subpanel_image_id: string | null;
+    card_icon_image_id: string | null;
+    font_id: string | null;
+}
+
 export type ElementType = 'background' | 'signin' | 'signup';  

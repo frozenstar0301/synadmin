@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { SignUpScreen } from '../types/index';
+import { Screen } from '../types/index';
 
 import axios from 'axios';
 
@@ -9,15 +9,15 @@ const api = axios.create({
     baseURL: API_URL,
 });
 
-export const useSignUpScreens = () => {
+export const useCheckInScreens = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const saveScreen = async (screen: Partial<SignUpScreen>) => {
+  const saveScreen = async (screen: Partial<Screen>) => {
     try {
       setIsLoading(true);
       
-      await api.post('/signupscreen', screen);
+      await api.post('/checkinscreen', screen);
 
     } catch (err) {
       console.error('Save error:', err);
@@ -30,7 +30,7 @@ export const useSignUpScreens = () => {
 
   const loadScreen = async () => {
     try {
-      const response = await api.get('/signupscreen');
+      const response = await api.get('/checkinscreen');
       const existingData = response.data;
 
       return existingData;

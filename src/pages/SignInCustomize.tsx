@@ -287,7 +287,7 @@ export const SignInCustomize = ({ id }: SignInCustomizeProps) => {
         </Box>
 
         <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
-          <Grid item xs={12} lg={7} order={{ xs: 2, lg: 1 }}>
+          <Grid item xs={12} lg={8} order={{ xs: 2, lg: 1 }}>
             <Paper
               elevation={3}
               sx={{
@@ -321,7 +321,7 @@ export const SignInCustomize = ({ id }: SignInCustomizeProps) => {
             </Paper>
           </Grid>
 
-          <Grid item xs={12} lg={5} order={{ xs: 1, lg: 2 }}>
+          <Grid item xs={12} lg={4} order={{ xs: 1, lg: 2 }}>
             <Paper
               elevation={3}
               sx={{

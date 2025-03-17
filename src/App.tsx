@@ -33,6 +33,8 @@ function App() {
           {/* Keep these routes for backward compatibility, but redirect to the new shared layout */}
           <Route path="/signincustomize" element={<Navigate to="/customize" replace />} />
           <Route path="/signupcustomize" element={<Navigate to="/customize" replace />} />
+          <Route path="/forgetpwcustomize" element={<Navigate to="/customize" replace />} />
+          <Route path="/checkincustomize" element={<Navigate to="/customize" replace />} />
           <Route path="/" element={<Navigate to="/customize" replace />} />
         </Routes>
       </AuthProvider>

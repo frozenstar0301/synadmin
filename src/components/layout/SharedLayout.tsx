@@ -4,8 +4,10 @@ import { Box, Toolbar } from '@mui/material';
 import { Header } from './Header';
 import { SignInCustomize } from '../../pages/SignInCustomize';
 import { SignUpCustomize } from '../../pages/SignUpCustomize';
+import { ForgetPwCustomize } from '../../pages/ForgetPwCustomize';
+import { CheckInCustomize } from '../../pages/CheckInCustomize';
 
-type ScreenType = 'signin' | 'signup';
+type ScreenType = 'signin' | 'signup' | 'forgetPw' | 'checkin';
 
 export const SharedLayout = () => {
   const [currentScreen, setCurrentScreen] = useState<ScreenType>('signin');
@@ -15,19 +17,33 @@ export const SharedLayout = () => {
     setIsSaving(true);
     // Call the appropriate save function based on current screen
     try {
-      if (currentScreen === 'signin') {
-        // Call signin save function
-        // We'll need to expose this from the SignInCustomize component
-        const signinElement = document.getElementById('signin-customize-component');
-        if (signinElement && (signinElement as any).__saveScreen) {
-          await (signinElement as any).__saveScreen();
-        }
-      } else {
-        // Call signup save function
-        const signupElement = document.getElementById('signup-customize-component');
-        if (signupElement && (signupElement as any).__saveScreen) {
-          await (signupElement as any).__saveScreen();
-        }
+      switch (currentScreen) {
+        case 'signin':
+          const signinElement = document.getElementById('signin-customize-component');
+          if (signinElement && (signinElement as any).__saveScreen) {
+            await (signinElement as any).__saveScreen();
+          }
+          break;
+        case 'signup':
+          const signupElement = document.getElementById('signin-customize-component');
+          if (signupElement && (signupElement as any).__saveScreen) {
+            await (signupElement as any).__saveScreen();
+          }
+          break;
+        case 'forgetPw':
+          const forgetPwElement = document.getElementById('forget-customize-component');
+          if (forgetPwElement && (forgetPwElement as any).__saveScreen) {
+            await (forgetPwElement as any).__saveScreen();
+          }
+          break;
+        case 'checkin':
+          const checkinElement = document.getElementById('checkin-customize-component');
+          if (checkinElement && (checkinElement as any).__saveScreen) {
+            await (checkinElement as any).__saveScreen();
+          }
+          break;
+        default:
+          break;
       }
     } catch (error) {
       console.error('Error saving:', error);
@@ -48,31 +64,46 @@ export const SharedLayout = () => {
         minHeight: '100vh',
       }}
     >
-      <Header 
+      <Header
         onSave={handleSave}
         isSaving={isSaving}
         screenType={currentScreen}
         onScreenTypeChange={handleScreenTypeChange}
       />
       <Toolbar />
-      
+
       <Box sx={{ display: 'flex', flexGrow: 1 }}>
-        {/* Render the appropriate component based on currentScreen */}
-        <Box 
-          sx={{ 
+        <Box
+          sx={{
             display: currentScreen === 'signin' ? 'block' : 'none',
             width: '100%'
           }}
         >
           <SignInCustomize id="signin-customize-component" />
         </Box>
-        <Box 
-          sx={{ 
+        <Box
+          sx={{
             display: currentScreen === 'signup' ? 'block' : 'none',
             width: '100%'
           }}
         >
           <SignUpCustomize id="signup-customize-component" />
+        </Box>
+        <Box
+          sx={{
+            display: currentScreen === 'forgetPw' ? 'block' : 'none',
+            width: '100%'
+          }}
+        >
+          <ForgetPwCustomize id="forget-customize-component" />
+        </Box>
+        <Box
+          sx={{
+            display: currentScreen === 'checkin' ? 'block' : 'none',
+            width: '100%'
+          }}
+        >
+          <CheckInCustomize id="checkin-customize-component" />
         </Box>
       </Box>
     </Box>

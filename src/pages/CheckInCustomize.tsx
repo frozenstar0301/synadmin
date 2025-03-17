@@ -30,10 +30,10 @@ import { BackgroundSelector } from '../components/DesignEditor/BackgroundSelecto
 import { ButtonDesigner } from '../components/DesignEditor/ButtonDesigner';
 import { useImages } from '../hooks/useImages';
 import { useFonts } from '../hooks/useFonts';
-import { useSignUpScreens } from '../hooks/useSignUpScreens';
-import { FontItem, ImageItem, SignUpScreen } from '../types/index';
+import { useCheckInScreens } from '../hooks/useCheckInScreens';
+import { FontItem, ImageItem, CheckInScreen } from '../types/index';
 import { ColorPicker } from '../components/DesignEditor/ColorPicker';
-import { SignUpScreenPreview } from '../components/DesignEditor/SignUpScreenPreview';
+import { CheckInRewardPreview } from '../components/DesignEditor/CheckInRewardPreview';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -47,7 +47,7 @@ interface AlertState {
   severity: 'success' | 'error';
 }
 
-interface SignUpCustomizeProps {
+interface CheckInCustomizeProps {
   id?: string;
 }
 
@@ -78,20 +78,17 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-export const SignUpCustomize = ({ id }: SignUpCustomizeProps) => {
+export const CheckInCustomize = ({ id }: CheckInCustomizeProps) => {
   const theme = useTheme();
   const isXs = useMediaQuery(theme.breakpoints.down('sm'));
   const isMd = useMediaQuery(theme.breakpoints.down('md'));
 
   const { images, uploadImage, isUploading: isUploadingImage } = useImages();
   const { fonts, uploadFont, isUploading: isUploadingFont } = useFonts();
-  const { saveScreen, loadScreen } = useSignUpScreens();
+  const { saveScreen, loadScreen } = useCheckInScreens();
 
-  const [screen, setScreen] = useState<Partial<SignUpScreen>>({
-    username_border_color: '#ffffff',
-    email_border_color: '#ffffff',
-    password_border_color: '#ffffff',
-    password_confirm_border_color: '#ffffff',
+  const [screen, setScreen] = useState<Partial<CheckInScreen>>({
+    card_border_color: '#ffffff',
   });
   const [tabValue, setTabValue] = useState(0);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
@@ -126,7 +123,6 @@ export const SignUpCustomize = ({ id }: SignUpCustomizeProps) => {
     }
   };
 
-  // Expose the save function to the parent component
   useEffect(() => {
     if (id) {
       const element = document.getElementById(id);
@@ -140,10 +136,17 @@ export const SignUpCustomize = ({ id }: SignUpCustomizeProps) => {
     setTabValue(newValue);
   };
 
-  const handleBackgroundSelect = (image: ImageItem | null) => {
+  const handleBackground1Select = (image: ImageItem | null) => {
     setScreen((prev: any) => ({
       ...prev,
-      background_image_id: image?.id || null,
+      background1_image_id: image?.id || null,
+    }));
+  };
+
+  const handleBackground2Select = (image: ImageItem | null) => {
+    setScreen((prev: any) => ({
+      ...prev,
+      background2_image_id: image?.id || null,
     }));
   };
 
@@ -160,60 +163,53 @@ export const SignUpCustomize = ({ id }: SignUpCustomizeProps) => {
       subpanel_image_id: image?.id || null,
     }));
   };
-
-  const handleEmailSelect = (image: ImageItem | null) => {
+  
+  const handleCardBorderColor = (color: string) => {
     setScreen((prev: any) => ({
       ...prev,
-      email_image_id: image?.id || null,
+      card_border_color: color,
     }));
   };
 
-  const handleUsernameSelect = (image: ImageItem | null) => {
+  const handleCardContentImage = (image: ImageItem | null) => {
     setScreen((prev: any) => ({
       ...prev,
-      username_image_id: image?.id || null,
+      card_content_bg_image_id: image?.id || null,
     }));
   };
 
-  const handlePasswordSelect = (image: ImageItem | null) => {
+  const handleCardTitleImage = (image: ImageItem | null) => {
     setScreen((prev: any) => ({
       ...prev,
-      password_image_id: image?.id || null,
+      card_title_bg_image_id: image?.id || null,
     }));
   };
 
-  const handlePasswordConfirmSelect = (image: ImageItem | null) => {
+  const handleGemImage = (image: ImageItem | null) => {
     setScreen((prev: any) => ({
       ...prev,
-      password_confirm_image_id: image?.id || null,
+      gem_image_id: image?.id || null,
     }));
   };
 
-  const handleEmailBorderSelect = (color: string) => {
+  const handleCardImage = (image: ImageItem | null) => {
     setScreen((prev: any) => ({
       ...prev,
-      email_border_color: color,
+      card_icon_image_id: image?.id || null,
     }));
   };
 
-  const handleUsernameBorderSelect = (color: string) => {
+  const handleGetImage = (image: ImageItem | null) => {
     setScreen((prev: any) => ({
       ...prev,
-      username_border_color: color,
+      get_image_id: image?.id || null,
     }));
   };
 
-  const handlePasswordBorderSelect = (color: string) => {
+  const handleMarkImage = (image: ImageItem | null) => {
     setScreen((prev: any) => ({
       ...prev,
-      password_border_color: color,
-    }));
-  };
-
-  const handlePasswordConfirmBorderSelect = (color: string) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      password_confirm_border_color: color,
+      mark_image_id: image?.id || null,
     }));
   };
 
@@ -305,7 +301,7 @@ export const SignUpCustomize = ({ id }: SignUpCustomizeProps) => {
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <DashboardIcon sx={{ mr: 1, color: theme.palette.primary.main }} />
             <Typography variant="h5" component="h1" fontWeight={600} color="primary">
-              Sign-Up Screen Designer
+              Check-In Reward Screen Designer
             </Typography>
           </Box>
           <Chip
@@ -344,7 +340,7 @@ export const SignUpCustomize = ({ id }: SignUpCustomizeProps) => {
                   Live Preview
                 </Typography>
               </Box>
-              <SignUpScreenPreview
+              <CheckInRewardPreview
                 screen={screen}
                 fonts={fonts}
                 images={images}
@@ -434,7 +430,17 @@ export const SignUpCustomize = ({ id }: SignUpCustomizeProps) => {
                   <Tab
                     icon={<ImageIcon />}
                     iconPosition={isXs ? "top" : "start"}
-                    label="Background"
+                    label="Mark"
+                  />
+                  <Tab
+                    icon={<ImageIcon />}
+                    iconPosition={isXs ? "top" : "start"}
+                    label="Background-Top"
+                  />
+                  <Tab
+                    icon={<ImageIcon />}
+                    iconPosition={isXs ? "top" : "start"}
+                    label="Background-Main"
                   />
                   <Tab
                     icon={<ImageIcon />}
@@ -449,42 +455,32 @@ export const SignUpCustomize = ({ id }: SignUpCustomizeProps) => {
                   <Tab
                     icon={<ImageIcon />}
                     iconPosition={isXs ? "top" : "start"}
-                    label="Email"
+                    label="Card-Title"
                   />
                   <Tab
                     icon={<ColorLensIcon />}
                     iconPosition={isXs ? "top" : "start"}
-                    label="Email Border Colors"
+                    label="Card-Selected-Border-Color"
+                  />
+                  <Tab
+                    icon={<ColorLensIcon />}
+                    iconPosition={isXs ? "top" : "start"}
+                    label="Card-Content-Image"
                   />
                   <Tab
                     icon={<ImageIcon />}
                     iconPosition={isXs ? "top" : "start"}
-                    label="Username"
-                  />
-                  <Tab
-                    icon={<ColorLensIcon />}
-                    iconPosition={isXs ? "top" : "start"}
-                    label="Username Border Colors"
+                    label="Gem"
                   />
                   <Tab
                     icon={<ImageIcon />}
                     iconPosition={isXs ? "top" : "start"}
-                    label="Password"
-                  />
-                  <Tab
-                    icon={<ColorLensIcon />}
-                    iconPosition={isXs ? "top" : "start"}
-                    label="Password Border Colors"
+                    label="Card"
                   />
                   <Tab
                     icon={<ImageIcon />}
                     iconPosition={isXs ? "top" : "start"}
-                    label="Password Confirm"
-                  />
-                  <Tab
-                    icon={<ColorLensIcon />}
-                    iconPosition={isXs ? "top" : "start"}
-                    label="Re-Password Border Colors"
+                    label="Get"
                   />
                   <Tab
                     icon={<TextFieldsIcon />}
@@ -513,14 +509,36 @@ export const SignUpCustomize = ({ id }: SignUpCustomizeProps) => {
                   <BackgroundSelector
                     title="Background Image"
                     images={images}
-                    selectedImageId={screen.background_image_id || ""}
-                    onSelect={handleBackgroundSelect}
+                    selectedImageId={screen.mark_image_id || ""}
+                    onSelect={handleMarkImage}
                     onUpload={uploadImage}
                     isUploading={isUploadingImage}
                   />
                 </TabPanel>
 
                 <TabPanel value={tabValue} index={1}>
+                  <BackgroundSelector
+                    title="Background Image"
+                    images={images}
+                    selectedImageId={screen.background1_image_id || ""}
+                    onSelect={handleBackground1Select}
+                    onUpload={uploadImage}
+                    isUploading={isUploadingImage}
+                  />
+                </TabPanel>
+
+                <TabPanel value={tabValue} index={2}>
+                  <BackgroundSelector
+                    title="Background Image"
+                    images={images}
+                    selectedImageId={screen.background2_image_id || ""}
+                    onSelect={handleBackground2Select}
+                    onUpload={uploadImage}
+                    isUploading={isUploadingImage}
+                  />
+                </TabPanel>
+
+                <TabPanel value={tabValue} index={3}>
                   <BackgroundSelector
                     title="Button Background Image"
                     images={images}
@@ -531,7 +549,7 @@ export const SignUpCustomize = ({ id }: SignUpCustomizeProps) => {
                   />
                 </TabPanel>
 
-                <TabPanel value={tabValue} index={2}>
+                <TabPanel value={tabValue} index={4}>
                   <BackgroundSelector
                     title="Sub Panel Background Image"
                     images={images}
@@ -542,42 +560,12 @@ export const SignUpCustomize = ({ id }: SignUpCustomizeProps) => {
                   />
                 </TabPanel>
 
-                <TabPanel value={tabValue} index={3}>
+                <TabPanel value={tabValue} index={5}>
                   <BackgroundSelector
                     title="Email Background Image"
                     images={images}
-                    selectedImageId={screen.email_image_id || ""}
-                    onSelect={handleEmailSelect}
-                    onUpload={uploadImage}
-                    isUploading={isUploadingImage}
-                  />
-                </TabPanel>
-
-                <TabPanel value={tabValue} index={4}>
-                  <Paper
-                    elevation={2}
-                    sx={{
-                      p: { xs: 2, sm: 3 },
-                      mb: 3,
-                      borderRadius: '10px',
-                      border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
-                      background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${alpha(theme.palette.background.default, 0.8)} 100%)`,
-                    }}
-                  >
-                    <ColorPicker
-                      title="Email Border Color"
-                      currentColor={screen.email_border_color || "#ffffff"}
-                      onColorChange={handleEmailBorderSelect}
-                    />
-                  </Paper>
-                </TabPanel>
-
-                <TabPanel value={tabValue} index={5}>
-                  <BackgroundSelector
-                    title="Username Background Image"
-                    images={images}
-                    selectedImageId={screen.username_image_id || ""}
-                    onSelect={handleUsernameSelect}
+                    selectedImageId={screen.card_title_bg_image_id || ""}
+                    onSelect={handleCardTitleImage}
                     onUpload={uploadImage}
                     isUploading={isUploadingImage}
                   />
@@ -595,74 +583,58 @@ export const SignUpCustomize = ({ id }: SignUpCustomizeProps) => {
                     }}
                   >
                     <ColorPicker
-                      title="Username Border Color"
-                      currentColor={screen.username_border_color || "#ffffff"}
-                      onColorChange={handleUsernameBorderSelect}
+                      title="Email Border Color"
+                      currentColor={screen.card_border_color || "#ffffff"}
+                      onColorChange={handleCardBorderColor}
                     />
                   </Paper>
                 </TabPanel>
 
                 <TabPanel value={tabValue} index={7}>
                   <BackgroundSelector
-                    title="Password Background Image"
+                    title="Card Content Image"
                     images={images}
-                    selectedImageId={screen.password_image_id || ""}
-                    onSelect={handlePasswordSelect}
+                    selectedImageId={screen.card_content_bg_image_id || ""}
+                    onSelect={handleCardContentImage}
                     onUpload={uploadImage}
                     isUploading={isUploadingImage}
                   />
                 </TabPanel>
 
                 <TabPanel value={tabValue} index={8}>
-                  <Paper
-                    elevation={2}
-                    sx={{
-                      p: { xs: 2, sm: 3 },
-                      mb: 3,
-                      borderRadius: '10px',
-                      border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
-                      background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${alpha(theme.palette.background.default, 0.8)} 100%)`,
-                    }}
-                  >
-                    <ColorPicker
-                      title="Password Border Color"
-                      currentColor={screen.password_border_color || "#ffffff"}
-                      onColorChange={handlePasswordBorderSelect}
-                    />
-                  </Paper>
+                  <BackgroundSelector
+                    title="Gem Image"
+                    images={images}
+                    selectedImageId={screen.gem_image_id || ""}
+                    onSelect={handleGemImage}
+                    onUpload={uploadImage}
+                    isUploading={isUploadingImage}
+                  />
+                </TabPanel>
+
+                <TabPanel value={tabValue} index={8}>
+                  <BackgroundSelector
+                    title="Card Icon Image"
+                    images={images}
+                    selectedImageId={screen.card_icon_image_id || ""}
+                    onSelect={handleCardImage}
+                    onUpload={uploadImage}
+                    isUploading={isUploadingImage}
+                  />
                 </TabPanel>
 
                 <TabPanel value={tabValue} index={9}>
                   <BackgroundSelector
-                    title="Password Confirm Background Image"
+                    title="Get Image"
                     images={images}
-                    selectedImageId={screen.password_confirm_image_id || ""}
-                    onSelect={handlePasswordConfirmSelect}
+                    selectedImageId={screen.get_image_id || ""}
+                    onSelect={handleGetImage}
                     onUpload={uploadImage}
                     isUploading={isUploadingImage}
                   />
                 </TabPanel>
 
                 <TabPanel value={tabValue} index={10}>
-                  <Paper
-                    elevation={2}
-                    sx={{
-                      p: { xs: 2, sm: 3 },
-                      mb: 3,
-                      borderRadius: '10px',
-                      border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
-                      background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${alpha(theme.palette.background.default, 0.8)} 100%)`,
-                    }}
-                  >
-                    <ColorPicker
-                      title="Password Confirmation Border Color"
-                      currentColor={screen.password_confirm_border_color || "#ffffff"}
-                      onColorChange={handlePasswordConfirmBorderSelect}
-                    />
-                  </Paper>
-                </TabPanel>
-
-                <TabPanel value={tabValue} index={11}>
                   <Paper
                     elevation={2}
                     sx={{
@@ -692,7 +664,7 @@ export const SignUpCustomize = ({ id }: SignUpCustomizeProps) => {
         open={alert.open}
         autoHideDuration={6000}
         onClose={(_, reason) => handleCloseAlert(reason)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        anchorOrigin={{ vertical: 'bottom',  horizontal: 'center' }}
       >
         <Alert
           onClose={() => handleCloseAlert()}

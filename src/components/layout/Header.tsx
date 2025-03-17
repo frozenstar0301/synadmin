@@ -111,7 +111,7 @@ const AnimatedButton = styled(Button)(({}) => ({
 }));
 
 // Define screen types
-export type ScreenType = 'signin' | 'signup';
+export type ScreenType = 'signin' | 'signup' | 'forgetPw' | 'checkin';
 
 interface HeaderProps {
   onSave: () => void;
@@ -319,6 +319,48 @@ export const Header = ({
                   }
                 }}>
                   <Typography fontWeight={screenType === 'signup' ? 600 : 400}>Sign Up</Typography>
+                </MenuItem>
+                <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
+                <MenuItem value="forgetPw" sx={{ 
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1.5,
+                  py: 1.8,
+                  color: 'white',
+                  transition: 'all 0.2s ease',
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                    paddingLeft: '20px',
+                  },
+                  '&.Mui-selected': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.25)',
+                    }
+                  }
+                }}>
+                  <Typography fontWeight={screenType === 'forgetPw' ? 600 : 400}>Forget Password</Typography>
+                </MenuItem>
+                <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
+                <MenuItem value="checkin" sx={{ 
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1.5,
+                  py: 1.8,
+                  color: 'white',
+                  transition: 'all 0.2s ease',
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                    paddingLeft: '20px',
+                  },
+                  '&.Mui-selected': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.25)',
+                    }
+                  }
+                }}>
+                  <Typography fontWeight={screenType === 'checkin' ? 600 : 400}>Check-In Reward</Typography>
                 </MenuItem>
               </StyledSelect>
             </FormControl>
