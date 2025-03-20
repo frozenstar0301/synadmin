@@ -20,20 +20,22 @@ import {
 } from '@mui/material';
 import {
   Image as ImageIcon,
-  TextFields as TextFieldsIcon,
-  ColorLens as ColorLensIcon,
+  // TextFields as TextFieldsIcon,
+  // ColorLens as ColorLensIcon,
   Visibility as VisibilityIcon,
   Dashboard as DashboardIcon,
   Palette as PaletteIcon
 } from '@mui/icons-material';
 import { BackgroundSelector } from '../components/DesignEditor/BackgroundSelector';
-import { ButtonDesigner } from '../components/DesignEditor/ButtonDesigner';
-import { ScreenPreview } from '../components/DesignEditor/ScreenPreview';
+// import { ButtonDesigner } from '../components/DesignEditor/ButtonDesigner';
+// import { ScreenPreview } from '../components/DesignEditor/ScreenPreview';
 import { useImages } from '../hooks/useImages';
 import { useFonts } from '../hooks/useFonts';
 import { useScreens } from '../hooks/useScreens';
-import { Screen, FontItem, ImageItem } from '../types/index';
-import { ColorPicker } from '../components/DesignEditor/ColorPicker';
+import { Screen, ImageItem } from '../types/index';
+// import { Screen, FontItem, ImageItem } from '../types/index';
+// import { ColorPicker } from '../components/DesignEditor/ColorPicker';
+import { SampleScreenPreview } from '../components/DesignEditor/SampleScreenPreview';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -84,7 +86,8 @@ export const SignInCustomize = ({ id }: SignInCustomizeProps) => {
   const isMd = useMediaQuery(theme.breakpoints.down('md'));
 
   const { images, uploadImage, isUploading: isUploadingImage } = useImages();
-  const { fonts, uploadFont, isUploading: isUploadingFont } = useFonts();
+  const { fonts } = useFonts();
+  // const { fonts, uploadFont, isUploading: isUploadingFont } = useFonts();
   const { saveScreen, loadScreen } = useScreens();
 
   const [screen, setScreen] = useState<Partial<Screen>>({
@@ -144,54 +147,54 @@ export const SignInCustomize = ({ id }: SignInCustomizeProps) => {
     }));
   };
 
-  const handleButtonSelect = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      button_image_id: image?.id || null,
-    }));
-  };
+  // const handleButtonSelect = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     button_image_id: image?.id || null,
+  //   }));
+  // };
 
-  const handleSubPanelSelect = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      subpanel_image_id: image?.id || null,
-    }));
-  };
+  // const handleSubPanelSelect = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     subpanel_image_id: image?.id || null,
+  //   }));
+  // };
 
-  const handleEmailSelect = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      email_image_id: image?.id || null,
-    }));
-  };
+  // const handleEmailSelect = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     email_image_id: image?.id || null,
+  //   }));
+  // };
 
-  const handlePasswordSelect = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      password_image_id: image?.id || null,
-    }));
-  };
+  // const handlePasswordSelect = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     password_image_id: image?.id || null,
+  //   }));
+  // };
 
-  const handleCheckboxSelect = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      checkbox_image_id: image?.id || null,
-    }));
-  };
+  // const handleCheckboxSelect = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     checkbox_image_id: image?.id || null,
+  //   }));
+  // };
 
-  const handleCheckboxColorChange = (color: string) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      checkbox_background_color: color,
-    }));
-  };
+  // const handleCheckboxColorChange = (color: string) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     checkbox_background_color: color,
+  //   }));
+  // };
 
-  const handleSigninFontSelect = (font: FontItem) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      font_id: font.id,
-    }));
-  };
+  // const handleSigninFontSelect = (font: FontItem) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     font_id: font.id,
+  //   }));
+  // };
 
   const handleCloseAlert = (reason?: string) => {
     if (reason === 'clickaway') {
@@ -313,7 +316,12 @@ export const SignInCustomize = ({ id }: SignInCustomizeProps) => {
                   Live Preview
                 </Typography>
               </Box>
-              <ScreenPreview
+              {/* <ScreenPreview
+                screen={screen}
+                fonts={fonts}
+                images={images}
+              /> */}
+              <SampleScreenPreview
                 screen={screen}
                 fonts={fonts}
                 images={images}
@@ -405,7 +413,7 @@ export const SignInCustomize = ({ id }: SignInCustomizeProps) => {
                     iconPosition={isXs ? "top" : "start"}
                     label="Background"
                   />
-                  <Tab
+                  {/* <Tab
                     icon={<ImageIcon />}
                     iconPosition={isXs ? "top" : "start"}
                     label="Button"
@@ -439,7 +447,7 @@ export const SignInCustomize = ({ id }: SignInCustomizeProps) => {
                     icon={<TextFieldsIcon />}
                     iconPosition={isXs ? "top" : "start"}
                     label="Fonts"
-                  />
+                  /> */}
                 </Tabs>
               </Box>
 
@@ -469,7 +477,7 @@ export const SignInCustomize = ({ id }: SignInCustomizeProps) => {
                   />
                 </TabPanel>
 
-                <TabPanel value={tabValue} index={1}>
+                {/* <TabPanel value={tabValue} index={1}>
                   <BackgroundSelector
                     title="Button Background Image"
                     images={images}
@@ -562,7 +570,7 @@ export const SignInCustomize = ({ id }: SignInCustomizeProps) => {
                       isUploading={isUploadingFont}
                     />
                   </Paper>
-                </TabPanel>
+                </TabPanel> */}
               </Box>
             </Paper>
           </Grid>

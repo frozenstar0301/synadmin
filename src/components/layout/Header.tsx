@@ -31,6 +31,7 @@ import {
 import { useAuth } from '../../contexts/AuthContext';
 import logoImage from '../../assets/avatar.png';
 import { ReactNode } from 'react';
+import { ScreenType } from '../../types';
 
 // Enhanced styled Select component with animation
 const StyledSelect = styled(Select)(({}) => ({
@@ -110,15 +111,40 @@ const AnimatedButton = styled(Button)(({}) => ({
   }
 }));
 
-// Define screen types
-export type ScreenType = 'signin' | 'signup' | 'forgetPw' | 'checkin';
-
 interface HeaderProps {
   onSave: () => void;
   isSaving: boolean;
   screenType?: ScreenType;
   onScreenTypeChange?: (screenType: ScreenType) => void;
 }
+
+// Mapping for screen types to display names
+const screenOptions: { value: ScreenType; label: string }[] = [
+  { value: "signin", label: "Sign In" },
+  { value: "signup", label: "Sign Up" },
+  { value: "forgetPw", label: "Forget Password" },
+  { value: "checkin", label: "Check-In Reward" },
+  { value: "firstload", label: "First Load" },
+  { value: "synvault", label: "SYN Vault" },
+  { value: "syngames", label: "SYN Games" },
+  { value: "joingame", label: "Join Games" },
+  { value: "joinsyngamepopup", label: "Join SYN Game Pop Up" },
+  { value: "syngamepopup", label: "SYN Game Pop Up" },
+  { value: "rankuprewards", label: "Rank Up Rewards" },
+  { value: "rankuppercentage", label: "Rank Up Percentage" },
+  { value: "topnavbar", label: "Top Navbar" },
+  { value: "playerprofile", label: "Player Profile" },
+  { value: "changecharacter", label: "Change Character" },
+  { value: "leadershipboard", label: "Leadership Board" },
+  { value: "linkemail", label: "Link Email" },
+  { value: "inbox", label: "Inbox" },
+  { value: "dailyrewards", label: "Daily Rewards" },
+  { value: "seasons", label: "Seasons" },
+  { value: "earnsynpoints", label: "Earn SYN Points" },
+  { value: "history", label: "History" },
+  { value: "changeSettings", label: "Change Settings" },
+  { value: "bottomNavbar", label: "Bottom Navbar" }
+];
 
 export const Header = ({ 
   onSave, 
@@ -272,96 +298,44 @@ export const Header = ({
                       border: '1px solid rgba(255, 255, 255, 0.1)',
                       backdropFilter: 'blur(10px)',
                       overflow: 'hidden',
+                      maxHeight: '240px', // Set maximum height for dropdown
                       '& .MuiMenuItem-root': {
                         transition: 'all 0.2s ease',
+                      },
+                      '& ul': {
+                        maxHeight: '240px', // Limit the height of the dropdown
+                        overflowY: 'auto', // Enable vertical scrolling
                       }
                     }
                   }
                 }}
               >
-                <MenuItem value="signin" sx={{ 
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 1.5,
-                  py: 1.8,
-                  color: 'white',
-                  transition: 'all 0.2s ease',
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                    paddingLeft: '20px',
-                  },
-                  '&.Mui-selected': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    '&:hover': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.25)',
-                    }
-                  }
-                }}>
-                  <Typography fontWeight={screenType === 'signin' ? 600 : 400}>Sign In</Typography>
-                </MenuItem>
-                <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
-                <MenuItem value="signup" sx={{ 
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 1.5,
-                  py: 1.8,
-                  color: 'white',
-                  transition: 'all 0.2s ease',
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                    paddingLeft: '20px',
-                  },
-                  '&.Mui-selected': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    '&:hover': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.25)',
-                    }
-                  }
-                }}>
-                  <Typography fontWeight={screenType === 'signup' ? 600 : 400}>Sign Up</Typography>
-                </MenuItem>
-                <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
-                <MenuItem value="forgetPw" sx={{ 
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 1.5,
-                  py: 1.8,
-                  color: 'white',
-                  transition: 'all 0.2s ease',
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                    paddingLeft: '20px',
-                  },
-                  '&.Mui-selected': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    '&:hover': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.25)',
-                    }
-                  }
-                }}>
-                  <Typography fontWeight={screenType === 'forgetPw' ? 600 : 400}>Forget Password</Typography>
-                </MenuItem>
-                <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
-                <MenuItem value="checkin" sx={{ 
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 1.5,
-                  py: 1.8,
-                  color: 'white',
-                  transition: 'all 0.2s ease',
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                    paddingLeft: '20px',
-                  },
-                  '&.Mui-selected': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    '&:hover': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.25)',
-                    }
-                  }
-                }}>
-                  <Typography fontWeight={screenType === 'checkin' ? 600 : 400}>Check-In Reward</Typography>
-                </MenuItem>
+                {screenOptions.map(option => (
+                  <MenuItem 
+                    key={option.value} 
+                    value={option.value} 
+                    sx={{ 
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1.5,
+                      py: 1.8,
+                      color: 'white',
+                      transition: 'all 0.2s ease',
+                      '&:hover': {
+                        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                        paddingLeft: '20px',
+                      },
+                      '&.Mui-selected': {
+                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                        '&:hover': {
+                          backgroundColor: 'rgba(255, 255, 255, 0.25)',
+                        }
+                      }
+                    }}
+                  >
+                    <Typography fontWeight={screenType === option.value ? 600 : 400}>{option.label}</Typography>
+                  </MenuItem>
+                ))}
               </StyledSelect>
             </FormControl>
           </Box>

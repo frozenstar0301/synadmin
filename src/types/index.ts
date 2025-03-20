@@ -53,7 +53,7 @@ export interface ForgetPwScreen {
 export interface CheckInScreen {
     id: string;
     background1_image_id: string | null;
-    background2_image_id: string | null;
+    background_image_id: string | null;
     button_image_id: string | null;
     card_border_color: string | null;
     card_content_bg_image_id: string | null;
@@ -66,4 +66,9 @@ export interface CheckInScreen {
     font_id: string | null;
 }
 
-export type ElementType = 'background' | 'signin' | 'signup';  
+export interface SampleScreen {
+    id: string;
+    background_image_id: string | null;
+}
+
+export type ScreenType = 'signin' | 'signup' | 'forgetPw' | 'checkin' | 'firstload' | 'synvault' | 'syngames' | 'joingame' | 'joinsyngamepopup' | 'syngamepopup' | 'rankuprewards' | 'rankuppercentage' | 'topnavbar' | 'playerprofile' | 'changecharacter' | 'leadershipboard' | 'linkemail' | 'inbox' | 'dailyrewards' | 'seasons' | 'earnsynpoints' | 'history' | 'changeSettings' | 'bottomNavbar';

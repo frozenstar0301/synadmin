@@ -34,7 +34,7 @@ export const LoginForm = () => {
   const onSubmit = async (data: any) => {
     try {
       await login(data);
-      navigate('/signincustomize');
+      navigate('/customize');
     } catch (error) {
       console.error(error);
     }

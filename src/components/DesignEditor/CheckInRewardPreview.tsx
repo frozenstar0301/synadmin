@@ -17,7 +17,7 @@ export const CheckInRewardPreview: React.FC<Props> = ({ screen, fonts, images })
   const [fontsLoaded, setFontsLoaded] = useState<{ [key: string]: boolean }>({});
   const markImage = images.find(img => img.id === screen.mark_image_id);
   const background1Image = images.find(img => img.id === screen.background1_image_id);
-  const background2Image = images.find(img => img.id === screen.background2_image_id);
+  const background2Image = images.find(img => img.id === screen.background_image_id);
   const buttonImage = images.find(img => img.id === screen.button_image_id);
   const signinFont = fonts.find(font => font.id === screen.font_id);
   const subpanelImage = images.find(img => img.id === screen.subpanel_image_id);

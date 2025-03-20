@@ -1,4 +1,3 @@
-// src/pages/SignUpCustomize.tsx
 import { useEffect, useState } from 'react';
 import {
   Box,
@@ -20,20 +19,22 @@ import {
 } from '@mui/material';
 import {
   Image as ImageIcon,
-  TextFields as TextFieldsIcon,
-  ColorLens as ColorLensIcon,
+  // TextFields as TextFieldsIcon,
+  // ColorLens as ColorLensIcon,
   Visibility as VisibilityIcon,
   Dashboard as DashboardIcon,
   Palette as PaletteIcon
 } from '@mui/icons-material';
 import { BackgroundSelector } from '../components/DesignEditor/BackgroundSelector';
-import { ButtonDesigner } from '../components/DesignEditor/ButtonDesigner';
+// import { ButtonDesigner } from '../components/DesignEditor/ButtonDesigner';
 import { useImages } from '../hooks/useImages';
 import { useFonts } from '../hooks/useFonts';
 import { useCheckInScreens } from '../hooks/useCheckInScreens';
-import { FontItem, ImageItem, CheckInScreen } from '../types/index';
-import { ColorPicker } from '../components/DesignEditor/ColorPicker';
-import { CheckInRewardPreview } from '../components/DesignEditor/CheckInRewardPreview';
+import { ImageItem, CheckInScreen } from '../types/index';
+// import { FontItem, ImageItem, CheckInScreen } from '../types/index';
+// import { ColorPicker } from '../components/DesignEditor/ColorPicker';
+// import { CheckInRewardPreview } from '../components/DesignEditor/CheckInRewardPreview';
+import { SampleScreenPreview } from '../components/DesignEditor/SampleScreenPreview';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -84,7 +85,8 @@ export const CheckInCustomize = ({ id }: CheckInCustomizeProps) => {
   const isMd = useMediaQuery(theme.breakpoints.down('md'));
 
   const { images, uploadImage, isUploading: isUploadingImage } = useImages();
-  const { fonts, uploadFont, isUploading: isUploadingFont } = useFonts();
+  const { fonts } = useFonts();
+  // const { fonts, uploadFont, isUploading: isUploadingFont } = useFonts();
   const { saveScreen, loadScreen } = useCheckInScreens();
 
   const [screen, setScreen] = useState<Partial<CheckInScreen>>({
@@ -136,89 +138,89 @@ export const CheckInCustomize = ({ id }: CheckInCustomizeProps) => {
     setTabValue(newValue);
   };
 
-  const handleBackground1Select = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      background1_image_id: image?.id || null,
-    }));
-  };
+  // const handleBackground1Select = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     background1_image_id: image?.id || null,
+  //   }));
+  // };
 
   const handleBackground2Select = (image: ImageItem | null) => {
     setScreen((prev: any) => ({
       ...prev,
-      background2_image_id: image?.id || null,
+      background_image_id: image?.id || null,
     }));
   };
 
-  const handleButtonSelect = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      button_image_id: image?.id || null,
-    }));
-  };
+  // const handleButtonSelect = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     button_image_id: image?.id || null,
+  //   }));
+  // };
 
-  const handleSubPanelSelect = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      subpanel_image_id: image?.id || null,
-    }));
-  };
+  // const handleSubPanelSelect = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     subpanel_image_id: image?.id || null,
+  //   }));
+  // };
   
-  const handleCardBorderColor = (color: string) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      card_border_color: color,
-    }));
-  };
+  // const handleCardBorderColor = (color: string) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     card_border_color: color,
+  //   }));
+  // };
 
-  const handleCardContentImage = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      card_content_bg_image_id: image?.id || null,
-    }));
-  };
+  // const handleCardContentImage = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     card_content_bg_image_id: image?.id || null,
+  //   }));
+  // };
 
-  const handleCardTitleImage = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      card_title_bg_image_id: image?.id || null,
-    }));
-  };
+  // const handleCardTitleImage = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     card_title_bg_image_id: image?.id || null,
+  //   }));
+  // };
 
-  const handleGemImage = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      gem_image_id: image?.id || null,
-    }));
-  };
+  // const handleGemImage = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     gem_image_id: image?.id || null,
+  //   }));
+  // };
 
-  const handleCardImage = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      card_icon_image_id: image?.id || null,
-    }));
-  };
+  // const handleCardImage = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     card_icon_image_id: image?.id || null,
+  //   }));
+  // };
 
-  const handleGetImage = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      get_image_id: image?.id || null,
-    }));
-  };
+  // const handleGetImage = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     get_image_id: image?.id || null,
+  //   }));
+  // };
 
-  const handleMarkImage = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      mark_image_id: image?.id || null,
-    }));
-  };
+  // const handleMarkImage = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     mark_image_id: image?.id || null,
+  //   }));
+  // };
 
-  const handleSigninFontSelect = (font: FontItem) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      font_id: font.id,
-    }));
-  };
+  // const handleSigninFontSelect = (font: FontItem) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     font_id: font.id,
+  //   }));
+  // };
 
   const handleCloseAlert = (reason?: string) => {
     if (reason === 'clickaway') {
@@ -340,7 +342,12 @@ export const CheckInCustomize = ({ id }: CheckInCustomizeProps) => {
                   Live Preview
                 </Typography>
               </Box>
-              <CheckInRewardPreview
+              {/* <CheckInRewardPreview
+                screen={screen}
+                fonts={fonts}
+                images={images}
+              /> */}
+              <SampleScreenPreview
                 screen={screen}
                 fonts={fonts}
                 images={images}
@@ -427,7 +434,7 @@ export const CheckInCustomize = ({ id }: CheckInCustomizeProps) => {
                     }
                   }}
                 >
-                  <Tab
+                  {/* <Tab
                     icon={<ImageIcon />}
                     iconPosition={isXs ? "top" : "start"}
                     label="Mark"
@@ -436,13 +443,13 @@ export const CheckInCustomize = ({ id }: CheckInCustomizeProps) => {
                     icon={<ImageIcon />}
                     iconPosition={isXs ? "top" : "start"}
                     label="Background-Top"
-                  />
+                  /> */}
                   <Tab
                     icon={<ImageIcon />}
                     iconPosition={isXs ? "top" : "start"}
                     label="Background-Main"
                   />
-                  <Tab
+                  {/* <Tab
                     icon={<ImageIcon />}
                     iconPosition={isXs ? "top" : "start"}
                     label="Button"
@@ -486,7 +493,7 @@ export const CheckInCustomize = ({ id }: CheckInCustomizeProps) => {
                     icon={<TextFieldsIcon />}
                     iconPosition={isXs ? "top" : "start"}
                     label="Fonts"
-                  />
+                  /> */}
                 </Tabs>
               </Box>
 
@@ -505,7 +512,7 @@ export const CheckInCustomize = ({ id }: CheckInCustomizeProps) => {
                 },
                 backgroundColor: alpha(theme.palette.background.paper, 0.7),
               }}>
-                <TabPanel value={tabValue} index={0}>
+                {/* <TabPanel value={tabValue} index={0}>
                   <BackgroundSelector
                     title="Background Image"
                     images={images}
@@ -525,20 +532,20 @@ export const CheckInCustomize = ({ id }: CheckInCustomizeProps) => {
                     onUpload={uploadImage}
                     isUploading={isUploadingImage}
                   />
-                </TabPanel>
+                </TabPanel> */}
 
-                <TabPanel value={tabValue} index={2}>
+                <TabPanel value={tabValue} index={0}>
                   <BackgroundSelector
                     title="Background Image"
                     images={images}
-                    selectedImageId={screen.background2_image_id || ""}
+                    selectedImageId={screen.background_image_id || ""}
                     onSelect={handleBackground2Select}
                     onUpload={uploadImage}
                     isUploading={isUploadingImage}
                   />
                 </TabPanel>
 
-                <TabPanel value={tabValue} index={3}>
+                {/* <TabPanel value={tabValue} index={3}>
                   <BackgroundSelector
                     title="Button Background Image"
                     images={images}
@@ -653,7 +660,7 @@ export const CheckInCustomize = ({ id }: CheckInCustomizeProps) => {
                       isUploading={isUploadingFont}
                     />
                   </Paper>
-                </TabPanel>
+                </TabPanel> */}
               </Box>
             </Paper>
           </Grid>

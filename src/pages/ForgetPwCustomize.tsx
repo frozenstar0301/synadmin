@@ -1,4 +1,3 @@
-// src/pages/SignUpCustomize.tsx
 import { useEffect, useState } from 'react';
 import {
   Box,
@@ -20,20 +19,22 @@ import {
 } from '@mui/material';
 import {
   Image as ImageIcon,
-  TextFields as TextFieldsIcon,
-  ColorLens as ColorLensIcon,
+  // TextFields as TextFieldsIcon,
+  // ColorLens as ColorLensIcon,
   Visibility as VisibilityIcon,
   Dashboard as DashboardIcon,
   Palette as PaletteIcon
 } from '@mui/icons-material';
 import { BackgroundSelector } from '../components/DesignEditor/BackgroundSelector';
-import { ButtonDesigner } from '../components/DesignEditor/ButtonDesigner';
+// import { ButtonDesigner } from '../components/DesignEditor/ButtonDesigner';
 import { useImages } from '../hooks/useImages';
 import { useFonts } from '../hooks/useFonts';
 import { useForgetPwScreens } from '../hooks/useForgetPwScreens';
-import { FontItem, ImageItem, ForgetPwScreen } from '../types/index';
-import { ColorPicker } from '../components/DesignEditor/ColorPicker';
-import { ForgetPwScreenPreview } from '../components/DesignEditor/ForgetPwScreenPreview';
+import { ImageItem, ForgetPwScreen } from '../types/index';
+// import { FontItem, ImageItem, ForgetPwScreen } from '../types/index';
+// import { ColorPicker } from '../components/DesignEditor/ColorPicker';
+// import { ForgetPwScreenPreview } from '../components/DesignEditor/ForgetPwScreenPreview';
+import { SampleScreenPreview } from '../components/DesignEditor/SampleScreenPreview';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -84,7 +85,8 @@ export const ForgetPwCustomize = ({ id }: ForgetPwCustomizeProps) => {
   const isMd = useMediaQuery(theme.breakpoints.down('md'));
 
   const { images, uploadImage, isUploading: isUploadingImage } = useImages();
-  const { fonts, uploadFont, isUploading: isUploadingFont } = useFonts();
+  const { fonts } = useFonts();
+  // const { fonts, uploadFont, isUploading: isUploadingFont } = useFonts();
   const { saveScreen, loadScreen } = useForgetPwScreens();
 
   const [screen, setScreen] = useState<Partial<ForgetPwScreen>>({
@@ -143,40 +145,40 @@ export const ForgetPwCustomize = ({ id }: ForgetPwCustomizeProps) => {
     }));
   };
 
-  const handleButtonSelect = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      button_image_id: image?.id || null,
-    }));
-  };
+  // const handleButtonSelect = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     button_image_id: image?.id || null,
+  //   }));
+  // };
 
-  const handleSubPanelSelect = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      subpanel_image_id: image?.id || null,
-    }));
-  };
+  // const handleSubPanelSelect = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     subpanel_image_id: image?.id || null,
+  //   }));
+  // };
 
-  const handleEmailSelect = (image: ImageItem | null) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      email_image_id: image?.id || null,
-    }));
-  };
+  // const handleEmailSelect = (image: ImageItem | null) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     email_image_id: image?.id || null,
+  //   }));
+  // };
   
-  const handleEmailBorderSelect = (color: string) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      email_border_color: color,
-    }));
-  };
+  // const handleEmailBorderSelect = (color: string) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     email_border_color: color,
+  //   }));
+  // };
 
-  const handleSigninFontSelect = (font: FontItem) => {
-    setScreen((prev: any) => ({
-      ...prev,
-      font_id: font.id,
-    }));
-  };
+  // const handleSigninFontSelect = (font: FontItem) => {
+  //   setScreen((prev: any) => ({
+  //     ...prev,
+  //     font_id: font.id,
+  //   }));
+  // };
 
   const handleCloseAlert = (reason?: string) => {
     if (reason === 'clickaway') {
@@ -298,7 +300,12 @@ export const ForgetPwCustomize = ({ id }: ForgetPwCustomizeProps) => {
                   Live Preview
                 </Typography>
               </Box>
-              <ForgetPwScreenPreview
+              {/* <ForgetPwScreenPreview
+                screen={screen}
+                fonts={fonts}
+                images={images}
+              /> */}
+              <SampleScreenPreview
                 screen={screen}
                 fonts={fonts}
                 images={images}
@@ -390,7 +397,7 @@ export const ForgetPwCustomize = ({ id }: ForgetPwCustomizeProps) => {
                     iconPosition={isXs ? "top" : "start"}
                     label="Background"
                   />
-                  <Tab
+                  {/* <Tab
                     icon={<ImageIcon />}
                     iconPosition={isXs ? "top" : "start"}
                     label="Button"
@@ -414,7 +421,7 @@ export const ForgetPwCustomize = ({ id }: ForgetPwCustomizeProps) => {
                     icon={<TextFieldsIcon />}
                     iconPosition={isXs ? "top" : "start"}
                     label="Fonts"
-                  />
+                  /> */}
                 </Tabs>
               </Box>
 
@@ -444,7 +451,7 @@ export const ForgetPwCustomize = ({ id }: ForgetPwCustomizeProps) => {
                   />
                 </TabPanel>
 
-                <TabPanel value={tabValue} index={1}>
+                {/* <TabPanel value={tabValue} index={1}>
                   <BackgroundSelector
                     title="Button Background Image"
                     images={images}
@@ -514,7 +521,7 @@ export const ForgetPwCustomize = ({ id }: ForgetPwCustomizeProps) => {
                       isUploading={isUploadingFont}
                     />
                   </Paper>
-                </TabPanel>
+                </TabPanel> */}
               </Box>
             </Paper>
           </Grid>
